@@ -2,9 +2,11 @@ package com.hieu10.taskappkotlin.data.repository
 
 import com.hieu10.taskappkotlin.data.TaskDAO
 import com.hieu10.taskappkotlin.data.models.Task
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@ViewModelScoped
 class TaskRepository @Inject constructor(private val taskDAO: TaskDAO) {
     val getAllTasks: Flow<List<Task>> = taskDAO.getAllTasks()
     val sortByLowPriority: Flow<List<Task>> = taskDAO.sortByLowPriority()
