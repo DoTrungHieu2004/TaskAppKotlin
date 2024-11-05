@@ -3,16 +3,22 @@ package com.hieu10.taskappkotlin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.hieu10.taskappkotlin.navigation.SetupNavigation
 import com.hieu10.taskappkotlin.ui.theme.TaskAppKotlinTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TaskAppKotlinTheme {
-
+                navController = rememberNavController()
+                SetupNavigation(navController = navController)
             }
         }
     }
