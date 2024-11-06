@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.hieu10.taskappkotlin"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.hieu10.taskappkotlin"
