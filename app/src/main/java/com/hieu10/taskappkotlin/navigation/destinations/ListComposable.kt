@@ -8,7 +8,7 @@ import com.hieu10.taskappkotlin.ui.screens.list.ListScreen
 import com.hieu10.taskappkotlin.utils.Constants
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
     composable (
         route = Constants.LIST_SCREEN,
