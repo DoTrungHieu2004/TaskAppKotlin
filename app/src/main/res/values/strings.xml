@@ -10,4 +10,5 @@
     <string name="close_icon">Close icon</string>
 
     <string name="search_placeholder">Search…</string>
+    <string name="empty_content">No tasks found</string>
 </resources>
