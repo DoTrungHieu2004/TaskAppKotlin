@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.hieu10.taskappkotlin.navigation.destinations.listComposable
 import com.hieu10.taskappkotlin.navigation.destinations.taskComposable
 import com.hieu10.taskappkotlin.ui.viewmodels.SharedViewModel
