@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieu10.taskappkotlin.data.models.Task
 import com.hieu10.taskappkotlin.data.repository.TaskRepository
+import com.hieu10.taskappkotlin.utils.RequestState
 import com.hieu10.taskappkotlin.utils.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,14 +22,19 @@ class SharedViewModel @Inject constructor(
     val searchAppBarState: MutableState<SearchAppBarState> = mutableStateOf(SearchAppBarState.CLOSED)
     val searchTextState: MutableState<String> = mutableStateOf("")
 
-    private val _allTasks = MutableStateFlow<List<Task>>(emptyList())
-    val allTasks: StateFlow<List<Task>> = _allTasks
+    private val _allTasks = MutableStateFlow<RequestState<List<Task>>>(RequestState.Idle)
+    val allTasks: StateFlow<RequestState<List<Task>>> = _allTasks
 
     fun getAllTasks() {
-        viewModelScope.launch {
-            repository.getAllTasks.collect {
-                _allTasks.value = it
+        _allTasks.value = RequestState.Loading
+        try {
+            viewModelScope.launch {
+                repository.getAllTasks.collect {
+                    _allTasks.value = RequestState.Success(it)
+                }
             }
+        } catch (e: Exception) {
+            _allTasks.value = RequestState.Error(e)
         }
     }
 }

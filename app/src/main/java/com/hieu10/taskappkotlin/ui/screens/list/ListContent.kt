@@ -28,19 +28,22 @@ import com.hieu10.taskappkotlin.ui.theme.PRIORITY_INDICATOR_SIZE
 import com.hieu10.taskappkotlin.ui.theme.TASK_ITEM_ELEVATION
 import com.hieu10.taskappkotlin.ui.theme.taskItemBackgroundColor
 import com.hieu10.taskappkotlin.ui.theme.taskItemTextColor
+import com.hieu10.taskappkotlin.utils.RequestState
 
 @Composable
 fun ListContent(
-    tasks: List<Task>,
+    tasks: RequestState<List<Task>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if (tasks.isEmpty()) {
-        EmptyContent()
-    } else {
-        DisplayTasks(
-            tasks = tasks,
-            navigateToTaskScreen = navigateToTaskScreen
-        )
+    if (tasks is RequestState.Success) {
+        if (tasks.data.isEmpty()) {
+            EmptyContent()
+        } else {
+            DisplayTasks(
+                tasks = tasks.data,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
     }
 }
 
