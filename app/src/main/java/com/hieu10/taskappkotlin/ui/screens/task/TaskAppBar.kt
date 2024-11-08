@@ -23,9 +23,17 @@ import com.hieu10.taskappkotlin.utils.Action
 
 @Composable
 fun TaskAppBar(
+    selectedTask: Task?,
     navigateToListScreen: (Action) -> Unit
 ) {
-    NewTaskAppBar(navigateToListScreen = navigateToListScreen)
+    if (selectedTask == null) {
+        NewTaskAppBar(navigateToListScreen = navigateToListScreen)
+    } else {
+        ExistingTaskAppBar(
+            selectedTask = selectedTask,
+            navigateToListScreen = navigateToListScreen
+        )
+    }
 }
 
 @Composable
